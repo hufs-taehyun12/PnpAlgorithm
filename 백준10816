@@ -1,0 +1,40 @@
+#define _CRT_NO_SECURE_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int n;
+    scanf_s("%d", &n);
+
+    int* array_N = (int*)malloc(n * sizeof(int));
+
+    for (int i = 0; i < n; i++) {
+        scanf_s("%d", &array_N[i]);
+    }
+
+    int m;
+    scanf_s("%d", &m);
+
+    int* array_M = (int*)malloc(m * sizeof(int));
+
+    for (int i = 0; i < m; i++) {
+        scanf_s("%d", &array_M[i]);
+    }
+
+    for (int i = 0; i < m; i++) {
+        int count = 0;
+        for (int j = 0; j < n; j++) {
+            if (array_N[j] == array_M[i]) {
+                count++;
+            }
+          
+        }
+        printf("%d ", count);
+    }
+    printf("\n");
+
+    free(array_N);
+    free(array_M);
+
+    return 0;
+}
