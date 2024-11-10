@@ -1,0 +1,71 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    int rows = 5;
+    char* array[5]; // 각 행을 가리키는 포인터 배열 선언
+    int max_length = 15; // 각 행의 최대 길이
+
+    // 각 행 입력 받기
+    for (int i = 0; i < rows; i++) {
+        array[i] = (char*)malloc((max_length + 1) * sizeof(char));  // 각 행에 16바이트 할당
+        if (array[i] == NULL) {
+            printf("Memory allocation failed\n");
+            return 1;
+        }
+        fgets(array[i], max_length + 1, stdin);  // 각 행을 입력받음 (공백 포함)
+
+        // fgets가 줄바꿈 문자를 받으면 이를 제거
+        array[i][strcspn(array[i], "\n")] = '\0';  // 줄바꿈 제거
+    }
+  
+
+    // 각 열에 대해 순차적으로 출력
+    for (int i = 0; i < max_length; i++) {  // 최대 15개의 열을 출력 (0~14)
+        for (int j = 0; j < rows; j++) {  // 각 행에 대해
+            if (array[j][i] != '\0') {  // 해당 문자가 존재하면 출력
+                // 유효한 문자인지 체크하고 출력 (예: 알파벳과 숫자만)
+                if ((array[j][i] >= 'A' && array[j][i] <= 'Z') ||
+                    (array[j][i] >= 'a' && array[j][i] <= 'z') ||
+                    (array[j][i] >= '0' && array[j][i] <= '9')) {
+                    printf("%c", array[j][i]);
+                }
+            }
+        }
+    }
+    printf("\n");
+
+    // 메모리 해제
+    for (int i = 0; i < rows; i++) {
+        free(array[i]);
+    }
+
+    return 0;
+}
+//
+->파이썬
+def main():
+    rows = 5
+    max_length = 15
+    array = []
+
+    # 각 행 입력 받기
+    for i in range(rows):
+        line = input(f"Enter characters for line {i + 1}: ").strip()  # 입력받고 양쪽 공백 제거
+        array.append(line)  # 배열에 저장
+
+    # 각 열에 대해 순차적으로 출력
+    result = ""
+    for i in range(max_length):  # 최대 15개의 열을 출력 (0~14)
+        for j in range(rows):  # 각 행에 대해
+            if i < len(array[j]):  # 해당 문자가 존재하면 출력
+                # 유효한 문자인지 체크하고 출력 (예: 알파벳과 숫자만)
+                if array[j][i].isalnum():  # 알파벳과 숫자만 허용
+                    result += array[j][i]
+
+    print(result)
+
+if __name__ == "__main__":
+    main()
