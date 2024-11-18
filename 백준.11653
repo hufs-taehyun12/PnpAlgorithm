@@ -1,0 +1,33 @@
+JAVA
+package Algorithm_11653;
+import java.util.Scanner;
+
+public class Algorithm_11653 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int number = scanner.nextInt();
+        int grade = 2;
+
+        while (number > 1) {
+            if (number % grade == 0) {
+                System.out.println(grade);
+                number /= grade;
+            } else {
+                grade++;
+            }
+        }
+
+        scanner.close();
+    }
+}
+Python
+number = int(input())
+grade = 2
+
+while number > 1:
+    if number % grade == 0:
+        print(grade)
+        number //= grade
+    else:
+        grade += 1
