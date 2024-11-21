@@ -1,0 +1,43 @@
+package Algorithm_9461;
+import java.util.Scanner;
+
+public class Algorithm_9461 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // 테스트 케이스 개수 입력
+        int T = sc.nextInt();
+        int[] testCases = new int[T];
+        int maxN = 0;
+
+        // 테스트 케이스 입력 처리
+        for (int i = 0; i < T; i++) {
+            testCases[i] = sc.nextInt();
+            maxN = Math.max(maxN, testCases[i]);
+        }
+
+        // 파도반 수열 계산
+        long[] padovan = computePadovan(maxN);
+
+        // 결과 출력
+        for (int n : testCases) {
+            System.out.println(padovan[n]);
+        }
+        sc.close();
+    }
+
+    // 파도반 수열 계산 함수
+    private static long[] computePadovan(int n) {
+        // n이 최대 100이므로 배열 크기 설정
+        long[] dp = new long[n + 1];
+        dp[1] = dp[2] = dp[3] = 1; // 초기값 설정
+
+        // DP로 파도반 수열 계산
+        for (int i = 4; i <= n; i++) {
+            dp[i] = dp[i - 2] + dp[i - 3];
+        }
+
+        return dp;
+    }
+}
+
